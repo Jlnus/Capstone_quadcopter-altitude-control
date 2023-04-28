@@ -1,3 +1,8 @@
+/*************************************
+사용 센서 : MPU6050
+IMU센서에서 가속도, 자이로 값을 읽고 각도로 변환
+**************************************/
+
 #include <Wire.h>
 
 int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;
@@ -67,11 +72,9 @@ void loop() {
     calcDT();
     calcAccelangle();
     calcGyroangle();
-    //   Serial.print("Accel roll angle : ");
 
     Serial.print(accel_angle_y);
     Serial.print(" // ");
-    //   Serial.print("Gyro roll angle : ");
     Serial.println(gyro_angle_y);
     delay(200);
 }
@@ -81,7 +84,7 @@ void calcDT() {
     dt = (t_now - t_prev) / 1000000.0;
     t_prev = t_now;
 }
-////////////////////////
+
 void calcAccelangle() {
     float accel_x, accel_y, accel_z;
     float accel_xz, accel_yz;
@@ -95,7 +98,7 @@ void calcAccelangle() {
     accel_yz = sqrt(pow(accel_y, 2) + pow(accel_z, 2));
     accel_angle_y = atan(-accel_x / accel_yz) * RADIANS_TO_DEGREES;
 }
-/////////////////////////
+
 void calcGyroangle() {
     const float GYROXYZ_TO_DEGREES_PER_SEC = 131; // 131도/s
 
