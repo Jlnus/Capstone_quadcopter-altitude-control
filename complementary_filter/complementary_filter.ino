@@ -4,6 +4,7 @@
 **************************************/
 
 #include <Wire.h>
+unsigned long startTime, currentTime, elapsedTime;
 
 int16_t AcX, AcY, AcZ, Tmp, GyX, GyY, GyZ;
 float accel_angle_x, accel_angle_y, accel_angle_z;
@@ -17,9 +18,12 @@ float gyro_y;
 float filtered_angle_y;
 
 void setup() {
+    // startTime = micros();
+
     Serial.begin(115200);
 
     Wire.begin();
+    Wire.setClock(400000);
     Wire.beginTransmission(0x68);
     Wire.write(0x6B);
     Wire.write(0);
@@ -68,6 +72,8 @@ void calibAccelGyro() {
 }
 
 void loop() {
+    // currentTime = micros();
+    
     readAccelGyro();
 
     calcDT();
@@ -80,6 +86,11 @@ void loop() {
     Serial.print(" // ");
     Serial.println(filtered_angle_y);
     delay(200);
+    // elapsedTime = currentTime - startTime;
+    // Serial.print(elapsedTime/1000.0,5);
+    // Serial.println(" ms");
+    // startTime = currentTime;
+
 }
 
 void calcDT() {
