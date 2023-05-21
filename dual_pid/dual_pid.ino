@@ -90,11 +90,11 @@ void setup() {
     initMPU6050(); // MPU6050초기화//
     // Serial.begin(115200);
     Serial1.begin(115200); // HM-10(블루투스)로 부터 데이터를 받기 위해서 선언//
-    calibAccelGyro(); // 가속도 자이로 센서의 초기 평균값을 구한다.//
-    initDT();         // 시간 간격 초기화//
+    calibAccelGyro();      // 가속도 자이로 센서의 초기 평균값을 구한다.//
+    initDT();              // 시간 간격 초기화//
     // accelNoiseTest();
-    initYPR(); // Roll, Pitch, Yaw의 초기각도 값을 설정(평균을 구해 초기 각도로
-               // 설정, 호버링을 위한 목표 각도로 사용)//
+    initYPR(); // Roll, Pitch, Yaw의 초기각도 값을 설정(평균을 구해 초기 각도로 설정, 호버링을 위한
+               // 목표 각도로 사용)//
     initMotorSpeed(); // 모터의 속도를 초기화//
 }
 ///////////////////////
@@ -185,13 +185,13 @@ void loop() {
     readAccelGyro();
     calcDT();
 
-    calcAccelYPR(); // 가속도 센서 Roll, Pitch, Yaw의 각도를 구하는 루틴//
-    calcGyroYPR(); // 자이로 센서 Roll, Pitch, Yaw의 각도를 구하는 루틴//
+    calcAccelYPR();    // 가속도 센서 Roll, Pitch, Yaw의 각도를 구하는 루틴//
+    calcGyroYPR();     // 자이로 센서 Roll, Pitch, Yaw의 각도를 구하는 루틴//
     calcFilteredYPR(); // 상보필터를 적용해 Roll, Pitch, Yaw의 각도를 구하는
                        // 루틴//
 
-    // calcYPRtoStdPID(); //calcFilteredYPR함수를 통해 얻은 Yaw, Pitch, Roll각을
-    // 이용해 표준 PID출력값을 구한다.//
+    // calcYPRtoStdPID();
+    // calcFilteredYPR함수를 통해 얻은 Yaw, Pitch, Roll각을 이용해 표준 PID출력값을 구한다.//
     calcYPRtoDualPID(); // 이중루프PID구현//
     calcMotorSpeed(); // PID출력값을 구한것을 기준으로 모터의 속도를 계산한다.//
     checkMspPacket();
@@ -273,10 +273,9 @@ void calcFilteredYPR() {
     filtered_angle_z = tmp_angle_z;
 }
 //////////////////////
-void dualPID(float target_angle, float angle_in, float rate_in,
-             float stabilize_kp, float stabilize_ki, float rate_kp,
-             float rate_ki, float &stabilize_iterm, float &rate_iterm,
-             float &output) {
+void dualPID(float target_angle, float angle_in, float rate_in, float stabilize_kp,
+             float stabilize_ki, float rate_kp, float rate_ki, float &stabilize_iterm,
+             float &rate_iterm, float &output) {
     float angle_error;
     float desired_rate;
     float rate_error;
@@ -295,9 +294,8 @@ void dualPID(float target_angle, float angle_in, float rate_in,
     rate_pterm = rate_kp * rate_error;      // 각속도 비례항//
     rate_iterm = rate_ki * rate_error * dt; // 각속도 적분항//
 
-    output = rate_pterm + rate_iterm +
-             stabilize_iterm; // 최종 출력 : 각속도 비례항 + 각속도 적분항 +
-                              // 안정화 적분항//
+    output = rate_pterm + rate_iterm + stabilize_iterm;
+    // 최종 출력 : 각속도 비례항 + 각속도 적분항 + // // 안정화 적분항//
 }
 //////////////////////
 
@@ -305,41 +303,30 @@ void calcYPRtoDualPID() {
     roll_angle_in = filtered_angle_y;
     roll_rate_in = gyro_y;
 
-    dualPID(roll_target_angle, roll_angle_in, roll_rate_in, roll_stabilize_kp,
-            roll_stabilize_ki, roll_rate_kp, roll_rate_ki, roll_stabilize_iterm,
-            roll_rate_iterm, roll_output);
+    dualPID(roll_target_angle, roll_angle_in, roll_rate_in, roll_stabilize_kp, roll_stabilize_ki,
+            roll_rate_kp, roll_rate_ki, roll_stabilize_iterm, roll_rate_iterm, roll_output);
 
     pitch_angle_in = filtered_angle_x;
     pitch_rate_in = gyro_x;
 
-    dualPID(pitch_target_angle, pitch_angle_in, pitch_rate_in,
-            pitch_stabilize_kp, pitch_stabilize_ki, pitch_rate_kp,
-            pitch_rate_ki, pitch_stabilize_iterm, pitch_rate_iterm,
-            pitch_output);
+    dualPID(pitch_target_angle, pitch_angle_in, pitch_rate_in, pitch_stabilize_kp,
+            pitch_stabilize_ki, pitch_rate_kp, pitch_rate_ki, pitch_stabilize_iterm,
+            pitch_rate_iterm, pitch_output);
 
     yaw_angle_in = filtered_angle_z;
     yaw_rate_in = gyro_z;
 
-    dualPID(yaw_target_angle, yaw_angle_in, yaw_rate_in, yaw_stabilize_kp,
-            yaw_stabilize_ki, yaw_rate_kp, yaw_rate_ki, yaw_stabilize_iterm,
-            yaw_rate_iterm, yaw_output);
+    dualPID(yaw_target_angle, yaw_angle_in, yaw_rate_in, yaw_stabilize_kp, yaw_stabilize_ki,
+            yaw_rate_kp, yaw_rate_ki, yaw_stabilize_iterm, yaw_rate_iterm, yaw_output);
 }
 ///////////////////////
 void calcMotorSpeed() {
 
     // 모터 속도 보정(호버링)//
-    motorA_speed = (throttle == 0) ? 0
-                                   : throttle + yaw_output + roll_output +
-                                         pitch_output + 12;
-    motorB_speed = (throttle == 0) ? 0
-                                   : throttle - yaw_output - roll_output +
-                                         pitch_output + 12;
-    motorC_speed = (throttle == 0) ? 0
-                                   : throttle + yaw_output - roll_output -
-                                         pitch_output + 20;
-    motorD_speed = (throttle == 0) ? 0
-                                   : throttle - yaw_output + roll_output -
-                                         pitch_output + 20;
+    motorA_speed = (throttle == 0) ? 0 : throttle + yaw_output + roll_output + pitch_output + 12;
+    motorB_speed = (throttle == 0) ? 0 : throttle - yaw_output - roll_output + pitch_output + 12;
+    motorC_speed = (throttle == 0) ? 0 : throttle + yaw_output - roll_output - pitch_output + 20;
+    motorD_speed = (throttle == 0) ? 0 : throttle - yaw_output + roll_output - pitch_output + 20;
 
     // 아날로그의 PWM값은 0~255이므로 각 경계값마다의 보정작업//
     if (motorA_speed < 0) {
