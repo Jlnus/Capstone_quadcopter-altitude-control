@@ -1,6 +1,6 @@
 /*************************************
 사용 센서 : MPU6050
-IMU센서에서 가속도, 자이로 값을 읽고 각도(only roll)로 변환
+IMU센서에서 가속도, 자이로 값을 읽고 각도(roll)로 변환
 **************************************/
 
 #include <Wire.h>
@@ -30,7 +30,7 @@ void setup() {
 void readAccelGyro() {
     Wire.beginTransmission(0x68);
     Wire.write(0x3B);
-    Wire.endTransmission(false); // I2C의 제어권을 이어감
+    Wire.endTransmission(false); 
     Wire.requestFrom(0x68, 14, true);
 
     // 가속도, 자이로 센서의 값을 읽어옴
@@ -76,7 +76,7 @@ void loop() {
     Serial.print(accel_angle_y);
     Serial.print(" // ");
     Serial.println(gyro_angle_y);
-    delay(200);
+    delay(100);
 }
 
 void calcDT() {
