@@ -73,24 +73,23 @@ void calibAccelGyro() {
 
 void loop() {
     // currentTime = micros();
-    
+
     readAccelGyro();
 
     calcDT();
     calcAccelangle();
     calcGyroangle();
     complementary_filter();
-    Serial.print(accel_angle_y);
-    Serial.print(" // ");
-    Serial.print(gyro_angle_y);
-    Serial.print(" // ");
+    Serial.println(accel_angle_y);
+    // Serial.print(" // ");
+    Serial.println(gyro_angle_y);
+    // Serial.print(" // ");
     Serial.println(filtered_angle_y);
     delay(200);
     // elapsedTime = currentTime - startTime;
     // Serial.print(elapsedTime/1000.0,5);
     // Serial.println(" ms");
     // startTime = currentTime;
-
 }
 
 void calcDT() {
