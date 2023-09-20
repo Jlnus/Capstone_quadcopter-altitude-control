@@ -22,5 +22,5 @@ Quadcopter altitude control with barometric pressure sensor
 
 ## Command & Telemetry
 스마트폰(안드로이드) 어플 - Custom Bluetooth Condtroller 사용
-![image](https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/d4e4e050-a4d4-4d9e-b390-1fc2f0696739)
 
+<img src="https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/d4e4e050-a4d4-4d9e-b390-1fc2f0696739"  width="200" />
