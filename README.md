@@ -20,7 +20,16 @@ Quadcopter altitude control with barometric pressure sensor
 |브레드보드	|브레드보드(400핀)|
 |IMU 센서	| GY-86 |
 
+## 제어 알고리즘
+### 전체 루프
+<img width="519" alt="image" src="https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/a952cf35-439f-43bc-b66f-43e829aed129">
+
+### 이중 PID
+<img width="725" alt="image" src="https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/c8737bf3-a1e2-4831-b95a-423009fbb96f">
+
+
+
 ## Command & Telemetry
-스마트폰(안드로이드) 어플 - Custom Bluetooth Condtroller 사용
+- 스마트폰(안드로이드) 어플 - Custom Bluetooth Controller 사용
 
 <img src="https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/d4e4e050-a4d4-4d9e-b390-1fc2f0696739"  width="200" />
