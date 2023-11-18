@@ -33,7 +33,12 @@ Quadcopter altitude control with barometric pressure sensor
 ## Command & Telemetry
 ### Bluetooth
 1. 스마트폰(안드로이드) 어플 - Custom Bluetooth Controller 사용
-<img src="https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/d4e4e050-a4d4-4d9e-b390-1fc2f0696739"  width="200" />
+<img src="https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/d4e4e050-a4d4-4d9e-b390-1fc2f0696739"  width="200">
+
+- 구성(각 버튼과 슬라이더 command 수정, protocol.ino 참조)
+
+<img src="https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/bb6e92cd-f0b1-4fd7-a404-460fd7545f78" width="150">
+ 
 
 2. PC 연결
 ble-serial - https://github.com/Jakeler/ble-serial
@@ -41,5 +46,3 @@ ble-serial - https://github.com/Jakeler/ble-serial
 ### WiFi
 ESP8266 활용법 - https://velog.io/@jinus/ESP8266-WiFi-모듈-활용하기
 
-### GUI
-프로세싱
