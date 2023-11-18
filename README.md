@@ -16,7 +16,7 @@ Quadcopter altitude control with barometric pressure sensor
 |배터리	|PT-B1800N-SP65 (11.1V, 3S1P, 65C /JST-XT) |
 |배터리 케이블|	XT60 전원케이블 (12AWG, 10cm)|
 |MCU|	아두이노 나노 V3.0 호환 보드 CH340|
-|수신기(Bluetooth)	| HM-10 |
+|송수신기	| HM-10(Bluetooth LE), ESP8266(WiFi) |
 |브레드보드	|브레드보드(400핀)|
 |IMU 센서	| GY-86 |
 
@@ -31,7 +31,18 @@ Quadcopter altitude control with barometric pressure sensor
 
 
 ## Command & Telemetry
-- 스마트폰(안드로이드) 어플 - Custom Bluetooth Controller 사용
+### Bluetooth
+1. 스마트폰(안드로이드) 어플 - Custom Bluetooth Controller 사용
+<img src="https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/d4e4e050-a4d4-4d9e-b390-1fc2f0696739"  width="200">
 
-<img src="https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/d4e4e050-a4d4-4d9e-b390-1fc2f0696739"  width="200" />
+- 구성(각 버튼과 슬라이더 command 수정, protocol.ino 참조)
+
+<img src="https://github.com/Jlnus/Capstone_quadcopter-altitude-control/assets/69241185/bb6e92cd-f0b1-4fd7-a404-460fd7545f78" width="150">
+ 
+
+2. PC 연결
+ble-serial - https://github.com/Jakeler/ble-serial
+
+### WiFi
+ESP8266 활용법 - https://velog.io/@jinus/ESP8266-WiFi-모듈-활용하기
 
