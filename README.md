@@ -1,18 +1,17 @@
 # 기압 센서를 이용한 고도 유지 호버링 
 Quadcopter altitude control with barometric pressure sensor
-캡스톤디자인(2023.03.02 ~ )
+캡스톤디자인(2023.03.02 ~ 2023.12.)
 
 Main file : quadcopter.ino
 
 ## 부품정보
 | 부품 | 이름 |
-|---|---|
+|:---:|---|
 | 프레임	| TAROT Whirlwind F450 드론 프레임 키트 V2 |
 | 랜딩기어	| 랜딩 기어 높이 확장 다리 익스텐더 지원 프로텍터 F450/F550 쿼드 콥터 용 |
 |프로펠러	|[GF] 10x4.5 멀티콥터용 프로펠러 오렌지 색상 (DJI Type) - 정방향, 역방향 1조|
 |ESC|	[GT-Drone] EC-X3 ESC for Multicopters (30A/OPTO/COB/6S)|
-|모터	| T2212-920KV 브러쉬리스 모터 CCW (V2) |
-|  | 	T2212-920KV 브러쉬리스 모터 CW (V2)|
+|모터	| T2212-920KV 브러쉬리스 모터 CCW & CW (V2) |
 |UBEC	|[Hobbywing] 3A U-BEC (Noise Free)|
 |배터리	|PT-B1800N-SP65 (11.1V, 3S1P, 65C /JST-XT) |
 |배터리 케이블|	XT60 전원케이블 (12AWG, 10cm)|
@@ -20,6 +19,9 @@ Main file : quadcopter.ino
 |송수신기	| HM-10(Bluetooth LE), ESP8266(WiFi) |
 |브레드보드	|브레드보드(400핀)|
 |IMU 센서	| GY-86 |
+
+## 하드웨어 아키텍쳐
+<img width="1415" height="859" alt="image" src="https://github.com/user-attachments/assets/ce55524d-3473-4bbc-81c4-14bd1cfc5039" />
 
 
 ## 제어 알고리즘
