@@ -1,6 +1,8 @@
-# 기압 센서를 이용한 고도 유지 호버링 
-Quadcopter altitude control with barometric pressure sensor
+# 쿼드콥터 호버링을 위한 자세제어기 설계 및 구현
+Design and implementation of quadcopter hovering attitude control
+
 캡스톤디자인(2023.03.02 ~ 2023.12.)
+https://lib.kau.ac.kr/data_contents_view.mir?article_no=45082&rno=310276&mloc_code=HAULMS
 
 Main file : quadcopter.ino
 
